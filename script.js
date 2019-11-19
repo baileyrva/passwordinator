@@ -14,45 +14,32 @@ function create() {
   for (var i = 0; i <= complexity; i++) {
     password =
       password +
-      values.charAt(Math.floor(Math.random() * Math.floor(values.length - 1)));
+      values.charAt(Math.floor(Math.random() * Math.floor(values.length)));
   }
 
   document.getElementById("display").value = password;
 
   document.getElementById("lastPasswords").innerHTML += password + "<br />";
 }
-document.getElementById("length").innerHTML = "Length: 128";
+document.getElementById("length").innerHTML = "Length: 64";
 
 document.getElementById("slider").oninput = function() {
   if (document.getElementById("slider").value > 0) {
     document.getElementById("length").innerHTML =
       "Length: " + document.getElementById("slider").value;
   } else {
-    document.getElementById("length").innerHTML = "Length: 1";
+    document.getElementById("length").innerHTML = "Length: 0";
   }
 };
 
-function copyPassword() {
-  document.getElementById("display").select();
-
-  document.execCommand("Copy");
-
-  alert("Password is on clipboard!");
-}
-
 function test() {
-  //   var hasUpper = false;
-  //   var hasLower = false;
-  //   var hasInt = false;
-  //   var int = "0,1,2,3,4,5,6,7,8,9,";
-  //   var specialChar = "!#$%&'()*+,-./:;<=>?@[]^_`{|}~";
-  //   var hasSpec = false;
-  var textBox = document.getElementById("display").value;
-  var containsUpper = /[A-Z]/.test(textBox);
-  var containsLower = /[a-z]/.test(textBox);
-  var containsDigits = /[0-9]/.test(textBox);
-  var containsSpecial = /[!@#$%^&*]/.test(textBox);
-  
+  var textBox = document.getElementById("display");
+  var containsUpper = /[A-Z]/.test(textBox.value);
+  var containsLower = /[a-z]/.test(textBox.value);
+  var containsDigits = /[0-9]/.test(textBox.value);
+  var containsSpecial = /[)(!@#$%^&*]/.test(textBox.value);
+  var testButton = document.getElementById("test?");
+  let valid = false;
 
   if (containsUpper) {
     document.getElementById("capital").checked = true;
@@ -70,21 +57,24 @@ function test() {
     document.getElementById("special").checked = true;
   }
 
+  if (textBox.value.length > 7) {
+    document.getElementById("size").checked = true;
+  }
+  if (
+    document.getElementById("special").checked &&
+    document.getElementById("size").checked &&
+    document.getElementById("numeric").checked &&
+    document.getElementById("lower").checked &&
+    document.getElementById("capital").checked
+  ) {
+    testButton.style.backgroundColor = "green";
+    document.getElementById("display").select();
+    document.execCommand("Copy");
+    alert("Password is on clipboard!");
+    valid = true;
+  } else {
+    testButton.style.backgroundColor = "red";
+    alert("Please try again.");
+    window.location.reload(true);
+  }
 }
-
-//     // if (textBox.charAt(i) === textBox.charAt(i).toLowerCase()) {
-//     //   document.getElementById("lower").checked = true;
-//     //   hasLower = true;
-//     // }
-
-//     // if (textBox.charAt(i) === (int)) {
-//     //   document.getElementById("numeric").checked = true;
-//     //   hasInt = true;
-//     // }
-
-//     //     if (textBox.charAt(i) === specialChar) {
-//     //       document.getElementById("special").checked = true;
-//     //       hasSpec = false;
-//     //     }
-//     //   }
-//   }

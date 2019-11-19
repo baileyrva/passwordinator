@@ -31,9 +31,8 @@
                     <br />
                     <input type="range" min="0" max="128" name="slider" id="slider">
                     <br />
-                    <button onclick="test()">Test?</button>
+                    <button id="test?" onclick="test()">Test?</button>
                     <button onclick="create()">Create</button>
-                    <button onclick="copyPassword()">Copy to Clipboard</button>
                     <div id="length"></div>
                 </div>
                 <div class="checkBox">
@@ -60,10 +59,17 @@
                         (Special Characters !@#$%^&*)
                     </label>
                 </div>
+                <div class="checkBox">
+                    <label>
+                        <input type="checkbox" disabled id="size">
+                        (Between 8-128)
+                    </label>
+                </div>
                 <div class="previous_passwords">
-                    <b>Previous Passwords:</b>
+                    <b>Previous Custom Passwords:</b>
                     <br />
                     <div id="lastPasswords"></div>
+            
                 </div>
 
             </div>
