@@ -11,7 +11,7 @@ function create() {
 
   let password = "";
 
-  for (var i = 0; i <= complexity; i++) {
+  for (var i = 1; i <= complexity; i++) {
     password =
       password +
       values.charAt(Math.floor(Math.random() * Math.floor(values.length)));
